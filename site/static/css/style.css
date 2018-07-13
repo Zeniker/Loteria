@@ -1,0 +1,289 @@
+.cabecalho{
+	width: 100%;
+	margin-top: 30px;
+}
+
+.cabecalho h1{
+	text-align: center;
+	height: 50px;
+}
+
+.dia-sorte{
+	background-color: rgb(211, 179, 21);
+	color: rgb(255,255,255);
+}
+
+.secao-numeros{
+	width: 40%;
+	float:left;
+	background-color: rgb(245, 252, 219);
+	color: rgb(149, 123, 86);
+	padding: 10px;
+}
+
+.btn-numero{
+	border-color: rgb(255, 110, 98);
+	background-color: rgb(255,255,255);
+	color: rgb(255, 110, 98);
+	width: 8%;
+	margin-left: 1%;
+	margin-right: 1%;
+	margin-bottom: 5px;
+}
+
+.input-file-configuracao .form-control,
+.input-file-acoes {	
+	width: 450px;
+}
+
+.input-file-configuracao{
+	padding-left: 5%;
+}
+
+.secao-config{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 1%;
+}
+
+.secao-ficha{
+	width: 50%;
+	float: left;	
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#resultadosArma .alert{
+	display: block;
+	float:left;
+}
+
+.tabela-acao{
+	margin-left: 5%;
+	margin-right: 5%;
+	width: 90%;
+	margin-top: 1%;
+}
+
+.inputs-ficha .input-group{
+	margin-bottom: 5px;
+}
+
+.inputs-ficha .input-group-addon{
+	width: 120px;
+}
+
+.inputs-ficha .form-control{
+	max-width: 150px;
+}
+
+.full{
+	width: 100%;
+}
+
+#modalConfiguracao .modal-dialog{
+	width: 60%;
+	max-width: none;
+}
+
+#modalConfiguracao .modal-body .form-configuracao{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.input-configuracao{
+	width: 30%;	
+	margin-left: 1.5%;
+	margin-right: 1.5%;
+	margin-bottom: 1%;
+}
+
+.input-configuracao label{
+	font-size: 0.80em;
+	max-width: 100%;
+	word-wrap: break-word;
+}
+
+.opcoes{
+	margin-left: 5%;	
+}
+
+.cartao-desabilitado{
+	pointer-events: none;
+    opacity: 0.4;
+}
+
+.menu-inicial-flex{	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;	
+	/*height: calc(10vh - 44px);*/
+}
+
+.login-flex{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/*height: calc(70vh - 44px);*/
+    margin-top: 100px;
+}
+
+.cartao-combatente{
+	padding: 5%;
+	display: static;
+}
+
+.cartao-combatente .card{
+	max-width: 500px;
+	width: 500px !important;
+	min-width: 500px;
+}
+
+.cartao-combatente .form-inline .input-group{
+	width: 100%;
+}
+
+.cartao-combatente .form-inline .input-group .form-control:first-child{
+	width: 70%;
+}
+
+.cartao-combatente .form-inline .input-group .form-control:last-child{
+	width: 30%;
+}
+
+.cartao-combatente progress{	
+	width: 90%;
+}
+
+.btn:hover{
+	cursor: pointer;
+}
+
+.fr {
+	float: right;
+}
+
+.btn-cancelar {
+	background-color: rgb(154, 37, 21);
+	border-color: rgb(154, 37, 21);
+	color: #FFF;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn-cancelar:hover{
+	background-color: rgb(189,33,48);
+	color: #FFF;
+}
+
+.btn-cancelar.margin-right {
+	margin-right: 20px;
+}
+
+.btn-sucesso {
+	background-color: rgb(49, 101, 81);
+	border-color: rgb(49, 101, 81);
+	color: #FFF;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn-sucesso:hover{
+	background-color: rgb(69, 121, 101);
+	color: #FFF;
+}
+
+.btn-novo {
+	background-color: rgb(124, 60, 118);
+	border-color: rgb(124, 60, 118);
+	color: #FFF;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn-novo:hover{
+	background-color: rgb(144, 80, 138);
+	color: #FFF;
+}
+
+.margin-bottom-10px {
+	margin-bottom: 10px !important;
+}
+
+.margin-left{
+	margin-left: 20px;
+}
+
+.margin-right-5px{
+	margin-right: 5px;
+}
+
+.margin-right-10px{
+	margin-right: 10px;
+}
+
+.table-link:link, .table-link:visited{
+	color: rgb(241, 108, 32);
+}
+
+/*parte mobile*/
+@media (max-width: 768px){
+	.input-file-configuracao{
+		padding-left: 4.5%;
+		padding-right: 4.5%;
+		padding-bottom: 5%;
+		width: 100%;
+	}
+
+	.secao-config{
+		padding-left: 4.5%;
+		padding-right: 4.5%;	
+	}
+
+	.secao-config .alert{
+		width: 100%;
+		text-align: center;
+	}
+
+	.secao-ficha{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 2%;
+	}
+
+	.inputs-ficha .input-group-addon{
+		width: 210px;
+	}
+
+	.inputs-ficha{
+		width: 100%;
+	}	
+
+	.inputs-ficha .form-control{
+		max-width: none;
+		width: 100%;
+	}
+
+	#modalConfiguracao .modal-dialog{
+		width: 90%;		
+	}
+
+	#modalConfiguracao .modal-header{
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	#modalConfiguracao h4{
+		margin-bottom: 5%;
+	}
+
+	.input-configuracao{
+		width: 95%;			
+	}
+}
