@@ -4,3 +4,4 @@
 # Python compiled
 *.pyc
 
+.venv

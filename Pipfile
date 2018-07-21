@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==2.0"
+django-widget-tweaks = "==1.4.2"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
