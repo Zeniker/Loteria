@@ -158,7 +158,7 @@ function DiaSorteController(diaSorteService) {
         var objetoSorteio = {};
         objetoSorteio.fixo = diaSorteService.montaObjetoSorteio(dezenaFixa);
         objetoSorteio.sorteaveis = [];
-        objetoSorteio.numero_jogos = vm.quantidade_jogos;
+        objetoSorteio.numero_jogos = parseInt(vm.quantidade_jogos);
         for(i in dezenasSorteaveis){
             objetoSorteio.sorteaveis.push(diaSorteService.montaObjetoSorteio(dezenasSorteaveis[i]));
         }

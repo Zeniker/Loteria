@@ -2,6 +2,7 @@
 
 {% block body %}
     <div ng-controller="DiaSorteController as vm" ng-init="vm.iniciar()">
+        {% csrf_token %}
         <div class="cabecalho dia-sorte">
             <h1>
                 Dia de Sorte
