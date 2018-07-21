@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html>
+<html ng-app="loteria">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
@@ -25,7 +25,7 @@
                     Jogos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMestre">
-                    <a class="dropdown-item" href="{% url 'dia_sorte' %}">Sistema</a>
+                    <a class="dropdown-item" href="{% url 'dia_sorte' %}">Dia de Sorte</a>
                 </div>
             </li>
         </ul>
@@ -41,5 +41,12 @@
 <script src="{% static "lib/jquery/jquery-3.2.1.min.js" %}"></script>
 <script src="{% static "lib/popper/popper.min.js" %}"></script>
 <script src="{% static "lib/bootstrap/js/bootstrap.min.js" %}"></script>
+
+<script src="{% static "js/loteria.js" %}"></script>
+<script src="{% static "js/controllers/diaSorteController.js" %}"></script>
+
+<script src="{% static "js/services/diaSorteService.js" %}"></script>
+
+<script src="{% static "js/directives/number-input.directive.js" %}"></script>
 
 </html>
