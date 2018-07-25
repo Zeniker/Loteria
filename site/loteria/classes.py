@@ -15,7 +15,7 @@ class EscolhasDiaSorte(object):
         self.numeroJogos = 0
         self.maximoRepeticao = 0
         self.blau = 0
-
+# blau
     def monta_resultado(self):
         self.maximoRepeticao = math.floor((self.numeroJogos * 60) / 100)
         for i in range(self.numeroJogos):
