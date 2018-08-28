@@ -5,8 +5,15 @@ from loteria.classes import EscolhasDiaSorte, DezenaDiaSorte
 import json
 
 
-class DiaSorteView(View):
-    template_name = 'dia_sorte.html'
+class DiaSorteV1View(View):
+    template_name = 'dia_sorte_v1.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+
+class DiaSorteV2View(View):
+    template_name = 'dia_sorte_v2.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)

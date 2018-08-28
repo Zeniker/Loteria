@@ -1,0 +1,5 @@
+<div class="d-flex flex-wrap">
+    <button class="btn btn-numero" ng-repeat="dezena in vm.dezenas" ng-bind="dezena.numero"
+            ng-click="vm.alteraDezena($index)"
+            ng-class="dezena.classe"></button>
+</div>

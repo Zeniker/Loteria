@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div ng-controller="DiaSorteController as vm" ng-init="vm.iniciar()">
+        {% csrf_token %}
+        <div class="cabecalho dia-sorte">
+            <h1>
+                Dia de Sorte - Versão 1
+            </h1>
+        </div>
+        <div class="alert alert-danger alert-loteria" ng-hide="vm.mensagemErro.length == 0">
+            <ul>
+                <li ng-repeat="mensagem in vm.mensagemErro" ng-bind="mensagem"></li>
+            </ul>
+        </div>
+        <div class="dia-sorte">
+            <div class="secao-numeros">
+                <div class="d-flex flex-wrap">
+                    {% include "secao_numero.html" %}
+                </div>
+
+            </div>
+        </div>
+        <div class="secao-botoes">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="quant_jogos">Quantidade de Jogos</label>
+                    <input type="text" id="quant_jogos" class="form-control" ng-model="vm.quantidade_jogos" number-input="2">
+                </div>
+            </div>
+
+            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(1)"
+                    ng-class="{'btn-selecionado': vm.selecaoAtual == 1}">Selecionar Fixo</button>
+
+            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(2)"
+                    ng-class="{'btn-selecionado': vm.selecaoAtual == 2}">Selecionar Sorteáveis</button>
+
+            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(0)"
+                    ng-class="{'btn-selecionado': vm.selecaoAtual == 0}">Limpar Dezena</button>
+
+            <button class="btn btn-outline-primary" ng-click="vm.limparTudo()">Limpar Tudo</button>
+
+            <button class="btn btn-outline-primary" ng-click="vm.sortear()">Sortear</button>
+        </div>
+        <div class="secao-resultado">
+            {% include "secao_resultado.html" %}
+        </div>
+    </div>
+
+{% endblock %}
