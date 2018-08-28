@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views import View
 from django.shortcuts import render
-from loteria.classes import EscolhasDiaSorte, DezenaDiaSorte
+from loteria.classes import EscolhasDiaSorte, DezenaDiaSorte, SorteioDiaSorteV2
 import json
 
 
@@ -19,7 +19,7 @@ class DiaSorteV2View(View):
         return render(request, self.template_name)
 
 
-def dia_sorte_sorteio(request):
+def dia_sorte_sorteio_v1(request):
     request_data = json.loads(request.body)
     fixo = request_data['fixo']
     escolhas_dia_sorte = EscolhasDiaSorte()
@@ -33,3 +33,15 @@ def dia_sorte_sorteio(request):
     json_string = json.dumps(escolhas_dia_sorte.resultados)
 
     return HttpResponse(json_string, content_type='application/json')
+
+
+def dia_sorte_sorteio_v2(request):
+    request_data = json.loads(request.body)
+    lista_valores = request_data['listaValores']
+    sorteio_dia_sorte = SorteioDiaSorteV2()
+
+    sorteio_dia_sorte.monta_resultado(lista_valores)
+
+    # json_string = json.dumps(sorteio_dia_sorte)
+
+    return HttpResponse("", content_type='application/json')
