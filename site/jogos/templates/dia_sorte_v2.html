@@ -5,7 +5,7 @@
         {% csrf_token %}
         <div class="cabecalho dia-sorte">
             <h1>
-                Dia de Sorte
+                Dia de Sorte - Versão 2
             </h1>
         </div>
         <div class="alert alert-danger alert-loteria" ng-hide="vm.mensagemErro.length == 0">
@@ -15,12 +15,7 @@
         </div>
         <div class="dia-sorte">
             <div class="secao-numeros">
-                <div class="d-flex flex-wrap">
-                    <button class="btn btn-numero" ng-repeat="dezena in vm.dezenas" ng-bind="dezena.numero"
-                            ng-click="vm.alteraDezena($index)"
-                            ng-class="dezena.classe"></button>
-                </div>
-
+                {% include "secao_numero.html" %}
             </div>
         </div>
         <div class="secao-botoes">
@@ -45,11 +40,7 @@
             <button class="btn btn-outline-primary" ng-click="vm.sortear()">Sortear</button>
         </div>
         <div class="secao-resultado">
-            <div class="form-group">
-                <label for="resultado">Resultado:</label>
-                <textarea id="resultado" class="form-control resultado-textarea" readonly ng-bind="vm.resultado"></textarea>
-            </div>
-
+            {% include "secao_resultado.html" %}
         </div>
     </div>
 

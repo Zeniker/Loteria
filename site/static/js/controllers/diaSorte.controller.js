@@ -156,13 +156,13 @@ function DiaSorteController(diaSorteService) {
         }
 
         var objetoSorteio = {};
-        objetoSorteio.fixo = diaSorteService.montaObjetoSorteio(dezenaFixa);
+        objetoSorteio.fixo = diaSorteService.montaObjetoSorteioV1(dezenaFixa);
         objetoSorteio.sorteaveis = [];
         objetoSorteio.numero_jogos = parseInt(vm.quantidade_jogos);
         for(i in dezenasSorteaveis){
-            objetoSorteio.sorteaveis.push(diaSorteService.montaObjetoSorteio(dezenasSorteaveis[i]));
+            objetoSorteio.sorteaveis.push(diaSorteService.montaObjetoSorteioV1(dezenasSorteaveis[i]));
         }
-        diaSorteService.sorteiaJogos(objetoSorteio, imprimeNaTela);
+        diaSorteService.sorteiaJogosV1(objetoSorteio, imprimeNaTela);
     }
 
     function imprimeNaTela(response){

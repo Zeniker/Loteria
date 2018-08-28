@@ -22,10 +22,11 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMestre" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Jogos
+                    Dia de Sorte
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMestre">
-                    <a class="dropdown-item" href="{% url 'dia_sorte' %}">Dia de Sorte</a>
+                    <a class="dropdown-item" href="{% url 'dia_sorte_v1' %}">Versão 1</a>
+                    <a class="dropdown-item" href="{% url 'dia_sorte_v2' %}">Versão 2</a>
                 </div>
             </li>
         </ul>
@@ -43,9 +44,9 @@
 <script src="{% static "lib/bootstrap/js/bootstrap.min.js" %}"></script>
 
 <script src="{% static "js/loteria.js" %}"></script>
-<script src="{% static "js/controllers/diaSorteController.js" %}"></script>
+<script src="{% static "js/controllers/diaSorte.controller.js" %}"></script>
 
-<script src="{% static "js/services/diaSorteService.js" %}"></script>
+<script src="{% static "js/services/diaSorte.service.js" %}"></script>
 
 <script src="{% static "js/directives/number-input.directive.js" %}"></script>
 

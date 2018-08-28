@@ -24,14 +24,14 @@
 
 .secao-botoes{
 	float: left;
-	width: 10%;
+	width: 20%;
 	margin: 10px;
 	display: flex;
 	flex-direction: column;
 }
 
 .secao-resultado{
-	width: 40%;
+	width: 30%;
 	float: left;
 }
 
@@ -39,6 +39,7 @@
 	width: 100%;
 	min-height: 400px;
 	font-size: 20px;
+	resize: none;
 }
 
 .secao-botoes > *{
