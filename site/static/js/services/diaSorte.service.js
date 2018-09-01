@@ -10,12 +10,26 @@
             montaObjetoSorteioV1: montaObjetoSorteioV1,
             sorteiaJogosV2: sorteiaJogosV2,
             montaObjetoSorteioV2: montaObjetoSorteioV2,
-
-            montaDezena: montaDezena
+            montaDezena: montaDezena,
+            alteraClasseDezena: alteraClasseDezena
         };
 
+        function alteraClasseDezena(dezena){
+            switch (dezena.estado) {
+                case 1:
+                    dezena.classe = 'btn-fixo';
+                    break;
+                case 2:
+                    dezena.classe = 'btn-sorteavel';
+                    break;
+                default:
+                    dezena.classe = '';
+                    break;
+            }
+        }
+
         function montaDezena(numero){
-            var dezena = {};
+            let dezena = {};
             dezena.numero = numero;
             dezena.estado = 0;
             dezena.quantSorteado = 0;
@@ -45,15 +59,17 @@
         }
 
         function montaObjetoSorteioV1(objeto){
-            var objetoSorteio = {};
+            let objetoSorteio = {};
             objetoSorteio.numero = objeto.numero;
             objetoSorteio.quant_sorteado = 0;
             return objetoSorteio;
         }
 
-        function montaObjetoSorteioV2(listaQuantidades){
-            var objetoSorteio = {};
+        function montaObjetoSorteioV2(listaQuantidades, quantidadeJogos, listaFixos){
+            let objetoSorteio = {};
             objetoSorteio.listaValores = listaQuantidades;
+            objetoSorteio.quantidadeJogos = parseInt(quantidadeJogos);
+            objetoSorteio.listaFixos = listaFixos;
             return objetoSorteio;
         }
 

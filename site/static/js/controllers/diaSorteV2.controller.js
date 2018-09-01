@@ -3,14 +3,14 @@ angular
     .controller('DiaSorteV2Controller', DiaSorteController);
 
 function DiaSorteController(diaSorteService) {
-    var vm = this;
+    let vm = this;
 
     //Funcoes
     vm.iniciar = iniciar;
-    // vm.alteraDezena = alteraDezena;
-    // vm.trocaSelecao = trocaSelecao;
-    // vm.limparTudo = limparTudo;
+    vm.limparTudo = limparTudo;
+    vm.limparDezenas = limparDezenas;
     vm.sortear = sortear;
+    vm.alteraDezena = alteraDezena;
 
     //Variaveis
     vm.resultado = '';
@@ -18,57 +18,34 @@ function DiaSorteController(diaSorteService) {
     vm.quant_dezenas_01_10 = "0";
     vm.quant_dezenas_11_20 = "0";
     vm.quant_dezenas_21_31 = "0";
+    vm.quantidade_jogos = "5";
     vm.mensagemErro = [];
 
     //Variaveis internas
 
     //Implementacao de funcoes
     function iniciar(){
-        for(var i = 1; i <= 31; i ++){
-            var dezena = diaSorteService.montaDezena(i);
+        for(let i = 1; i <= 31; i ++){
+            let dezena = diaSorteService.montaDezena(i);
             vm.dezenas.push(dezena);
         }
     }
 
-    // function montaDezena(numero){
-    //     var dezena = {};
-    //     dezena.numero = numero;
-    //     dezena.estado = 0;
-    //     dezena.quantSorteado = 0;
-    //     dezena.classe = '';
-    //
-    //     return dezena;
-    // }
+    function alteraDezena(indice){
+        let qtdFixo = 0;
+        for(let i in vm.dezenas){
+            if(vm.dezenas[i].estado === 1){
+                qtdFixo++;
+            }
+        }
 
-    // function alteraDezena(indice){
-    //     switch (vm.selecaoAtual){
-    //         case 0:
-    //             limpaSelecao(vm.dezenas[indice]);
-    //             break;
-    //         case 1:
-    //             selecionaFixo(vm.dezenas[indice]);
-    //             break;
-    //         case 2:
-    //             selecionaSorteavel(vm.dezenas[indice]);
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
+        console.log(qtdFixo);
 
-    // function alteraClasse(dezena){
-    //     switch (dezena.estado){
-    //         case 1:
-    //             dezena.classe = 'btn-fixo';
-    //             break;
-    //         case 2:
-    //             dezena.classe = 'btn-sorteavel';
-    //             break;
-    //         default:
-    //             dezena.classe = '';
-    //             break;
-    //     }
-    // }
+        if(qtdFixo < 3){
+            vm.dezenas[indice].estado = 1;
+            diaSorteService.alteraClasseDezena(vm.dezenas[indice]);
+        }
+    }
 
     // function limpaSelecao(dezena){
     //     dezena.estado = 0;
@@ -112,81 +89,83 @@ function DiaSorteController(diaSorteService) {
     //     vm.selecaoAtual = selecao;
     // }
 
-    // function limparTudo(){
-    //     vm.selecaoAtual = -1;
-    //     for(var i in vm.dezenas){
-    //         vm.dezenas[i].estado = 0;
-    //         alteraClasse(vm.dezenas[i]);
-    //     }
-    // }
+    function isQuantidadeCorreta(){
+        let total = 0;
+        if(vm.quant_dezenas_01_10 !== ""){
+            total += parseInt(vm.quant_dezenas_01_10);
+        }
+
+        if(vm.quant_dezenas_11_20 !== ""){
+            total += parseInt(vm.quant_dezenas_11_20);
+        }
+
+        if(vm.quant_dezenas_21_31 !== ""){
+            total += parseInt(vm.quant_dezenas_21_31);
+        }
+
+        console.log(total);
+
+        if(total !== 7){
+            adicionaMensagemErro("A soma das quantidades não pode ser diferente de 7");
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+
+    function limparDezenas(){
+        for(let i in vm.dezenas){
+            vm.dezenas[i].estado = 0;
+            diaSorteService.alteraClasseDezena(vm.dezenas[i]);
+        }
+    }
+
+    function limparTudo(){
+        vm.quant_dezenas_01_10 = "0";
+        vm.quant_dezenas_11_20 = "0";
+        vm.quant_dezenas_21_31 = "0";
+        limparDezenas();
+    }
 
     function sortear(){
-        var listaQuantidades =  [];
+        limpaMensagemErro();
+
+        if(!isQuantidadeCorreta()){
+            return;
+        }
+
+        let listaQuantidades =  [];
         listaQuantidades.push(parseInt(vm.quant_dezenas_01_10));
         listaQuantidades.push(parseInt(vm.quant_dezenas_11_20));
         listaQuantidades.push(parseInt(vm.quant_dezenas_21_31));
 
-        var objetoRequest = diaSorteService.montaObjetoSorteioV2(listaQuantidades);
-        diaSorteService.sorteiaJogosV2(objetoRequest, imprimeNaTela);
+        let listaFixos = [];
+        for(let indice in vm.dezenas){
+            let dezena = vm.dezenas[indice];
+            if(dezena.estado === 1){
+                listaFixos.push(dezena.numero);
+            }
+        }
 
-        // var contadorFixo = 0;
-        // var contadorSorteavel = 0;
-        // var dezenaFixa = {};
-        // var dezenasSorteaveis = [];
-        // for(var i in vm.dezenas){
-        //     vm.dezenas[i].quantSorteado = 0;
-        //     switch (vm.dezenas[i].estado){
-        //         case 1:
-        //             contadorFixo++;
-        //             dezenaFixa = vm.dezenas[i];
-        //             break;
-        //         case 2:
-        //             contadorSorteavel++;
-        //             dezenasSorteaveis.push(vm.dezenas[i]);
-        //             break;
-        //     }
-        // }
-        // vm.mensagemErro = [];
-        //
-        // if(contadorFixo !== 1){
-        //     vm.mensagemErro.push('Selecione uma dezena fixa');
-        // }
-        //
-        // if(contadorSorteavel !== 10){
-        //     vm.mensagemErro.push('Selecione 10 dezenas sorteaveis');
-        // }
-        //
-        // if(vm.quantidade_jogos == null || vm.quantidade_jogos % 5 > 0){
-        //     vm.mensagemErro.push('Quantidade de jogos deve ser múltipla de 5');
-        // }
-        //
-        // if(vm.mensagemErro.length > 0){
-        //     return
-        // }
-        //
-        // var objetoSorteio = {};
-        // objetoSorteio.fixo = diaSorteService.montaObjetoSorteioV1(dezenaFixa);
-        // objetoSorteio.sorteaveis = [];
-        // objetoSorteio.numero_jogos = parseInt(vm.quantidade_jogos);
-        // for(i in dezenasSorteaveis){
-        //     objetoSorteio.sorteaveis.push(diaSorteService.montaObjetoSorteioV1(dezenasSorteaveis[i]));
-        // }
-        // diaSorteService.sorteiaJogosV1(objetoSorteio, imprimeNaTela);
+        let objetoRequest = diaSorteService.montaObjetoSorteioV2(listaQuantidades, vm.quantidade_jogos, listaFixos);
+        diaSorteService.sorteiaJogosV2(objetoRequest, imprimeNaTela);
     }
 
     function imprimeNaTela(response){
-        var resultado = response.data;
-        for (var i in resultado){
-            resultado[i].sort();
-        }
+        let resultado = response.data;
         paraTexto(resultado);
     }
 
     function paraTexto(jogos){
-        var texto = '';
-        for(var i in jogos){
-            for(var j in jogos[i]){
-                texto += jogos[i][j].toString();
+        let texto = '';
+        for(let i in jogos){
+            for(let j in jogos[i]){
+                let numero = jogos[i][j].toString();
+                if (numero.length === 1){
+                    numero = "0" + numero;
+                }
+                texto += numero;
                 if(j < jogos[i].length -1){
                     texto += ' - ';
                 }else{
@@ -196,6 +175,14 @@ function DiaSorteController(diaSorteService) {
         }
 
         vm.resultado = texto;
+    }
+
+    function adicionaMensagemErro(mensagem){
+        vm.mensagemErro.push(mensagem);
+    }
+
+    function limpaMensagemErro(){
+        vm.mensagemErro = [];
     }
 
 

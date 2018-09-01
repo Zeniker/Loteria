@@ -1,12 +1,14 @@
 import math
 import random
 
+
 class Sorteador(object):
     def sorteia_indice(self, min, max):
         if min != max:
             return random.randint(min, max-1)
         else:
             return min
+
 
 class DezenaDiaSorte(object):
     def __init__(self, dicionario):
@@ -56,7 +58,6 @@ class EscolhasDiaSorte(object):
 
             resultado.sort()
 
-
     def _sorteia_indice(self, min, max):
         if min != max:
             return random.randint(min, max-1)
@@ -83,7 +84,7 @@ class SorteioDiaSorteV2Request(object):
 class SorteioDiaSorteV2(object):
     def __init__(self):
         self.sorteaveisLinha = []
-        self.sorteaveisLinha.append(list(range(0, 11)))
+        self.sorteaveisLinha.append(list(range(1, 11)))
         self.sorteaveisLinha.append(list(range(11, 21)))
         self.sorteaveisLinha.append(list(range(21, 32)))
         self.resultados = []
@@ -104,6 +105,8 @@ class SorteioDiaSorteV2(object):
                     igual_antigo = True
             if not igual_antigo:
                 self.resultados.append(resultado)
+
+        # self._print_resultados()
 
     def _sorteia_jogo(self, resultado: list):
         for indice_linha, linha in enumerate(self.sorteaveisLinha):
@@ -134,5 +137,6 @@ class SorteioDiaSorteV2(object):
         return qtd_removidos
 
     def _print_resultados(self):
+        print('---------------------------------')
         for resultado in self.resultados:
             print(resultado)
