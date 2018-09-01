@@ -1,7 +1,6 @@
-from django.shortcuts import redirect
+from django.views.generic import TemplateView
 
 
-def index(request):
-    # Redireciona para os jogos
-    return redirect('dia_sorte')
+class IndexView(TemplateView):
+    template_name = 'index.html'
 

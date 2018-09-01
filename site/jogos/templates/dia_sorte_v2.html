@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <div ng-controller="DiaSorteController as vm" ng-init="vm.iniciar()">
+    <div ng-controller="DiaSorteV2Controller as vm" ng-init="vm.iniciar()">
         {% csrf_token %}
         <div class="cabecalho dia-sorte">
             <h1>
@@ -24,19 +24,25 @@
                     <label for="quant_jogos">Quantidade de Jogos</label>
                     <input type="text" id="quant_jogos" class="form-control" ng-model="vm.quantidade_jogos" number-input="2">
                 </div>
+
+                <div class="col-md-12">
+                    <label for="quant_dezenas_01_10">Qtd. dezenas 01-10:</label>
+                    <input type="text" id="quant_dezenas_01_10" class="form-control" ng-model="vm.quant_dezenas_01_10"
+                           number-input="2" ng-change="vm.limpaDezenas()">
+                </div>
+                <div class="col-md-12">
+                    <label for="quant_dezenas_11_20">Qtd. dezenas 11-20:</label>
+                    <input type="text" id="quant_dezenas_11_20" class="form-control" ng-model="vm.quant_dezenas_11_20"
+                           number-input="2" ng-change="vm.limpaDezenas()">
+                </div>
+                <div class="col-md-12">
+                    <label for="quant_dezenas_21_31">Qtd. dezenas 21-31</label>
+                    <input type="text" id="quant_dezenas_21_31" class="form-control" ng-model="vm.quant_dezenas_21_31"
+                           number-input="2" ng-change="vm.limpaDezenas()">
+                </div>
             </div>
 
-            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(1)"
-                    ng-class="{'btn-selecionado': vm.selecaoAtual == 1}">Selecionar Fixo</button>
-
-            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(2)"
-                    ng-class="{'btn-selecionado': vm.selecaoAtual == 2}">Selecionar Sorteáveis</button>
-
-            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(0)"
-                    ng-class="{'btn-selecionado': vm.selecaoAtual == 0}">Limpar Dezena</button>
-
             <button class="btn btn-outline-primary" ng-click="vm.limparTudo()">Limpar Tudo</button>
-
             <button class="btn btn-outline-primary" ng-click="vm.sortear()">Sortear</button>
         </div>
         <div class="secao-resultado">

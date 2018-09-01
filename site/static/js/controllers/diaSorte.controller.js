@@ -24,19 +24,9 @@ function DiaSorteController(diaSorteService) {
     //Implementacao de funcoes
     function iniciar(){
         for(var i = 1; i <= 31; i ++){
-            var dezena = montaDezena(i);
+            var dezena = diaSorteService.montaDezena(i);
             vm.dezenas.push(dezena);
         }
-    }
-
-    function montaDezena(numero){
-        var dezena = {};
-        dezena.numero = numero;
-        dezena.estado = 0;
-        dezena.quantSorteado = 0;
-        dezena.classe = '';
-
-        return dezena;
     }
 
     function alteraDezena(indice){
