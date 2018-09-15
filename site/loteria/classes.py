@@ -79,6 +79,7 @@ class SorteioDiaSorteV2Request(object):
         self.listaFixos = []
         self.listaQtdSorteaveis = []
         self.qtdJogos = 0
+        self.listaExcluidos = []
 
 
 class SorteioDiaSorteV2(object):
@@ -93,6 +94,7 @@ class SorteioDiaSorteV2(object):
 
     def monta_resultados(self, request: SorteioDiaSorteV2Request):
         self.request = request
+        self._remove_excluidos_sorteaveis()
 
         for indice in range(0, self.request.qtdJogos):
             resultado = []
@@ -135,6 +137,14 @@ class SorteioDiaSorteV2(object):
                 qtd_removidos += 1
 
         return qtd_removidos
+
+    def _remove_excluidos_sorteaveis(self):
+        for excluido in self.request.listaExcluidos:
+            for linha in self.sorteaveisLinha:
+                if excluido in linha:
+                    indice_excluido = linha.index(excluido)
+                    linha.pop(indice_excluido)
+
 
     def _print_resultados(self):
         print('---------------------------------')

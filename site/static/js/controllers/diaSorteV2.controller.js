@@ -11,6 +11,7 @@ function DiaSorteController(diaSorteService) {
     vm.limparDezenas = limparDezenas;
     vm.sortear = sortear;
     vm.alteraDezena = alteraDezena;
+    vm.trocaSelecao = trocaSelecao;
 
     //Variaveis
     vm.resultado = '';
@@ -29,9 +30,26 @@ function DiaSorteController(diaSorteService) {
             let dezena = diaSorteService.montaDezena(i);
             vm.dezenas.push(dezena);
         }
+        vm.selecaoAtual = -1;
     }
 
     function alteraDezena(indice){
+        switch (vm.selecaoAtual){
+            case 0:
+                limpaSelecao(vm.dezenas[indice]);
+                break;
+            case 1:
+                selecionaFixo(vm.dezenas[indice]);
+                break;
+            case 2:
+                selecionaExcluido(vm.dezenas[indice]);
+                break;
+            default:
+                break;
+        }
+    }
+
+    function selecionaFixo(dezena){
         let qtdFixo = 0;
         for(let i in vm.dezenas){
             if(vm.dezenas[i].estado === 1){
@@ -39,55 +57,35 @@ function DiaSorteController(diaSorteService) {
             }
         }
 
-        console.log(qtdFixo);
-
         if(qtdFixo < 3){
-            vm.dezenas[indice].estado = 1;
-            diaSorteService.alteraClasseDezena(vm.dezenas[indice]);
+            dezena.estado = 1;
+            diaSorteService.alteraClasseDezena(dezena);
         }
     }
 
-    // function limpaSelecao(dezena){
-    //     dezena.estado = 0;
-    //     alteraClasse(dezena);
-    // }
-    //
-    // function selecionaFixo(dezena){
-    //     var existeFixo = false;
-    //     for(i in vm.dezenas){
-    //         if(vm.dezenas[i].estado === 1){
-    //             existeFixo = true;
-    //             break;
-    //         }
-    //     }
-    //
-    //     if(!existeFixo){
-    //         dezena.estado = 1;
-    //         alteraClasse(dezena);
-    //     }
-    //
-    // }
-    //
-    // function selecionaSorteavel(dezena){
-    //     var contador = 0;
-    //     for(var i in vm.dezenas){
-    //         if(vm.dezenas[i].estado === 2){
-    //             contador++;
-    //         }
-    //         if(contador === 10){
-    //             break;
-    //         }
-    //     }
-    //
-    //     if(contador < 10){
-    //         dezena.estado = 2;
-    //         alteraClasse(dezena);
-    //     }
-    // }
+    function selecionaExcluido(dezena){
+        let qtdExcluido = 0;
+        for(let i in vm.dezenas){
+            if(vm.dezenas[i].estado === 2){
+                qtdExcluido++;
+            }
+        }
 
-    // function trocaSelecao(selecao){
-    //     vm.selecaoAtual = selecao;
-    // }
+        if(qtdExcluido < 15){
+            dezena.estado = 2;
+            diaSorteService.alteraClasseDezena(dezena);
+        }
+    }
+
+
+    function limpaSelecao(dezena){
+        dezena.estado = 0;
+        diaSorteService.alteraClasseDezena(dezena);
+    }
+
+    function trocaSelecao(selecao){
+        vm.selecaoAtual = selecao;
+    }
 
     function isQuantidadeCorreta(){
         let total = 0;
@@ -103,7 +101,7 @@ function DiaSorteController(diaSorteService) {
             total += parseInt(vm.quant_dezenas_21_31);
         }
 
-        console.log(total);
+        // console.log(total);
 
         if(total !== 7){
             adicionaMensagemErro("A soma das quantidades não pode ser diferente de 7");
@@ -125,6 +123,7 @@ function DiaSorteController(diaSorteService) {
         vm.quant_dezenas_01_10 = "0";
         vm.quant_dezenas_11_20 = "0";
         vm.quant_dezenas_21_31 = "0";
+        vm.selecaoAtual = -1;
         limparDezenas();
     }
 
@@ -141,14 +140,20 @@ function DiaSorteController(diaSorteService) {
         listaQuantidades.push(parseInt(vm.quant_dezenas_21_31));
 
         let listaFixos = [];
+        let listaExcluidos = [];
         for(let indice in vm.dezenas){
             let dezena = vm.dezenas[indice];
-            if(dezena.estado === 1){
-                listaFixos.push(dezena.numero);
+            switch (dezena.estado){
+                case 1:
+                    listaFixos.push(dezena.numero);
+                    break;
+                case 2:
+                    listaExcluidos.push(dezena.numero);
+                    break;
             }
         }
 
-        let objetoRequest = diaSorteService.montaObjetoSorteioV2(listaQuantidades, vm.quantidade_jogos, listaFixos);
+        let objetoRequest = diaSorteService.montaObjetoSorteioV2(listaQuantidades, vm.quantidade_jogos, listaFixos, listaExcluidos);
         diaSorteService.sorteiaJogosV2(objetoRequest, imprimeNaTela);
     }
 
