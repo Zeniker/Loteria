@@ -40,6 +40,7 @@ def dia_sorte_sorteio_v2(request):
     sorteio_request = SorteioDiaSorteV2Request()
     sorteio_request.listaQtdSorteaveis = request_data['listaValores']
     sorteio_request.listaFixos = request_data['listaFixos']
+    sorteio_request.listaExcluidos = request_data['listaExcluidos']
     sorteio_request.qtdJogos = request_data['quantidadeJogos']
     sorteio_dia_sorte = SorteioDiaSorteV2()
 

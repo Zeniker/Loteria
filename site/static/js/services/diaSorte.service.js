@@ -65,11 +65,12 @@
             return objetoSorteio;
         }
 
-        function montaObjetoSorteioV2(listaQuantidades, quantidadeJogos, listaFixos){
+        function montaObjetoSorteioV2(listaQuantidades, quantidadeJogos, listaFixos, listaExcluidos){
             let objetoSorteio = {};
             objetoSorteio.listaValores = listaQuantidades;
             objetoSorteio.quantidadeJogos = parseInt(quantidadeJogos);
             objetoSorteio.listaFixos = listaFixos;
+            objetoSorteio.listaExcluidos = listaExcluidos;
             return objetoSorteio;
         }
 

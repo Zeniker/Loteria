@@ -42,7 +42,17 @@
                 </div>
             </div>
 
+            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(1)"
+                    ng-class="{'btn-selecionado': vm.selecaoAtual == 1}">Selecionar Fixo</button>
+
+            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(2)"
+                    ng-class="{'btn-selecionado': vm.selecaoAtual == 2}">Selecionar Excluídos</button>
+
+            <button class="btn btn-outline-primary" ng-click="vm.trocaSelecao(0)"
+                    ng-class="{'btn-selecionado': vm.selecaoAtual == 0}">Limpar Dezena</button>
+
             <button class="btn btn-outline-primary" ng-click="vm.limparTudo()">Limpar Tudo</button>
+
             <button class="btn btn-outline-primary" ng-click="vm.sortear()">Sortear</button>
         </div>
         <div class="secao-resultado">
